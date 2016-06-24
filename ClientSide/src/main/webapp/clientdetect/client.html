@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<style type="text/css">
+		table, tr, td{
+			border: 1px solid;
+		}
+		table{
+			border-collapse: collapse;
+		}
+	</style>
+<!-- 	<script type="text/javascript" src="http://www.ip-look-up.com/Services/ipInfo.js"></script>
+ --></head>
+<body>
+<noscript>
+对不起，你的浏览器不支持或者禁用了脚本功能。
+</noscript>
+<h2>客户端网络信息</h2>
+<table id="netInfo">
+	<tr>
+		<th id="t">条目</th>
+		<th>值</th>
+	</tr>
+</table>
+<ul id="netInfo"></ul>
+<h2>客户端环境信息</h2>
+<table id="pcInfo">
+	<tr>
+		<th>条目</th>
+		<th>值</th>
+	</tr>
+</table>
+<ul id="pcInfo"></ul>
+	<script type="text/javascript">
+		//浏览器DPI
+		function js_getDPI() {
+		    var arrDPI = [];
+		    if (window.screen.deviceXDPI != undefined) {
+		        arrDPI[0] = window.screen.deviceXDPI;
+		        arrDPI[1] = window.screen.deviceYDPI;
+		    }
+		    else {
+		        var tmpNode = document.createElement("div");
+		        tmpNode.style.cssText = "width:1in;height:1in;visibility:hidden";
+		        document.body.appendChild(tmpNode);
+		        arrDPI[0] = parseInt(tmpNode.offsetWidth);
+		        arrDPI[1] = parseInt(tmpNode.offsetHeight);
+		        tmpNode.parentNode.removeChild(tmpNode);   
+		    }
+		    return arrDPI;
+		}
+		//alert(new ActiveXObject("RealPlayer"));
+		//是否支持falsh
+		for (var i=0; i < navigator.plugins.length; i++) {
+			//name 为shockwave flash的插件
+			document.write(navigator.plugins[i].name.toLowerCase() + "<br />");
+		}
+		window.netInfo = {
+			"IP（区分来源的IP还是真实IP）" : null,
+			"ip所在地理位置" : null,
+			"经纬度" : null,
+			"运营商" : null,
+			"是否是使用代理" : null,
+			"代理的类型" : null,
+			"代理的ip和接口" : null
+		}
+		window.pcInfo = {
+			"操作系统 navigator.platform" : navigator.platform,
+			"设备类型" : null,
+			"浏览器名称 navigator.appName" : navigator.appName,
+			"浏览器版本 navigator.appVersion" : navigator.appVersion,
+			"浏览器UA navigator.userAgent" : navigator.userAgent,
+			"是否启用js" : null,
+			"是否启用flash" : typeof navigator.plugins["Shockwave Flash"] != "undefined",
+			"是否启用图片" : null,
+			"是否启用cookie navigator.cookieEnabled" : navigator.cookieEnabled,
+			"Accept" : null,
+			"Accept语言" : null,
+			"AcceptEncoding" : null,
+			"浏览器语言 navigator.browserLanguage" : navigator.browserLanguage,
+			"系统语言 navigator.systemLanguage" : navigator.systemLanguage,
+			"用户语言 navigator.userLanguage" : navigator.userLanguage,
+			"Firefox和Chrome只支持navigator.language" : navigator.language,
+			"分辨率 screen.width,screen.height" : screen.width + "*" + screen.height,
+			"屏幕颜色" : screen.colorDepth,
+			"屏幕DPI" : js_getDPI(),
+			"时区" : new Date().getTimezoneOffset() / 60,
+			"请求来源URL" : window.location.href,
+			"网卡mac地址" : null
+		}
+		var netTarget = document.getElementById("netInfo");
+		for ( var key in window.netInfo) {
+			writeTr(netTarget, key, window.netInfo[key]);
+		}
+		var pcTarget = document.getElementById("pcInfo");
+		for ( var key in window.pcInfo) {
+			writeTr(pcTarget, key, window.pcInfo[key]);
+		}
+
+		if (document.all) {
+			netTarget.outerHTML = netTarget.outerHTML;
+			pcTarget.outerHTML = pcTarget.outerHTML;
+		}
+
+		function writeTr(target, item, value) {
+			var tr = document.createElement("tr");
+			var td1 = document.createElement("td");
+			var td2 = document.createElement("td");
+			td1.innerHTML = item;
+			td2.innerHTML = value;
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			target.appendChild(tr);
+		}
+	</script>
+	<a href="test.html">跳转</a>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript" src="client-detect.js"></script>
+<script type="text/javascript" src="../plugin/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="browser.js"></script>
+<script type="text/javascript">
+function showClientDetectDetail(obj, placeholder) {
+	var str = "";
+	if(!placeholder){
+		placeholder = "";
+	}
+	for ( var i in obj) {
+		str += placeholder + "[ " + i + " ] : "
+		if (obj[i] != null && typeof obj[i] == "object") {
+			str += "<br />";
+			str += showClientDetectDetail(obj[i], placeholder + "----");
+		} else {
+			str += obj[i] + "<br />";
+		}
+	}
+	return str;
+};
+
+document.write(showClientDetectDetail(ClientDetect));
+</script>
+</body>
+</html>

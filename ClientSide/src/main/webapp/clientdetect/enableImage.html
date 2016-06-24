@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<img id="img" alt="" src="test.png">
+<script type="text/javascript">
+	document.write("<br />")
+	document.write(document.getElementById("img").offsetWidth);
+	document.write("<br />")
+	document.write(document.getElementById("img").readyState);
+	setTimeout(function(){
+		alert(document.getElementById("img").naturalWidth);
+		alert(document.getElementById("img").clientWidth);
+	},2000)
+</script>
+</body>
+</html>
