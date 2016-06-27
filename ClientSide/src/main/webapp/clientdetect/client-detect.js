@@ -306,9 +306,14 @@
 		
 		submitByAjax({
 			url : "../ClientDetecterService",
-			async : true,
+			async : false,
 			success : function(responseText){
-				var response = JSON.parse(responseText);
+				var response;
+				if(typeof JSON == 'undefined'){
+					response = eval("(" + responseText + ")");
+				}else{
+					response = JSON.parse(responseText);
+				}
 				clientDetect.netEnvironment.ipAddress = response.ip;
 				clientDetect.netEnvironment.macAddress = response.macAddress;
 			},

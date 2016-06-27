@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  * Servlet implementation class ClientDetecterService
  */
@@ -34,7 +33,8 @@ public class ClientDetecterService extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ip = NetUtil.getRemoteIPAddress(request);
 		String macAddress = NetUtil.getMacAddress(ip, NetUtil.getClientOSType(request.getHeader("user-agent")));
-		response.getWriter().println("ip:" + ip + ",macAddress:" + macAddress);
+		String res = "{\"ip\":" + ip + ",\"macAddress\":" + macAddress + "}";
+		response.getWriter().println(res);
 	}
 
 }
