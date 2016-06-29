@@ -18,6 +18,7 @@ public class ClientDetecterServlet extends HttpServlet {
      * Default constructor. 
      */
     public ClientDetecterServlet() {
+    	super();
     }
 
 	/**

@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  * Servlet implementation class ClientDetecterService
  */
@@ -17,7 +18,6 @@ public class ClientDetecterService extends HttpServlet {
      */
     public ClientDetecterService() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,8 +33,15 @@ public class ClientDetecterService extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ip = NetUtil.getRemoteIPAddress(request);
 		String macAddress = NetUtil.getMacAddress(ip, NetUtil.getClientOSType(request.getHeader("user-agent")));
-		String res = "{\"ip\":" + ip + ",\"macAddress\":" + macAddress + "}";
-		response.getWriter().println(res);
+		String accept = request.getHeader("accept");
+		String acceptLan = request.getHeader("accept-language");
+		String acceptEnc = request.getHeader("accept-encoding");
+		StringBuffer res = new StringBuffer();
+		res.append("{\"ip\":\"").append(ip).append("\",\"macAddress\":\"")
+				.append(macAddress).append("\",\"accept\":\"").append(accept)
+				.append("\",\"acceptLanguage\":\"").append(acceptLan)
+				.append("\",\"acceptEncoding\":\"").append(acceptEnc).append("\"}");
+		response.getWriter().println(res.toString());
 	}
 
 }

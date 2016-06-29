@@ -271,11 +271,15 @@
 				//TODO
 				isSupportImage : true,
 				isSupportCookie : _nv.cookieEnabled,
+				accept : null,
+				acceptLanguage : null,
+				acceptEncoding : null,
 				browserLanguage : _nv.browserLanguage || null,
 				systemLanguage : _nv.systemLanguage || null,
 				userLanguage : _nv.userLanguage || null,
 				language : _nv.language || _nv.browserLanguage
 						|| _nv.systemLanguate || _nv.userLanguage || null
+				
 			},
 			/* 屏幕信息 */
 			screen : {
@@ -316,6 +320,9 @@
 				}
 				clientDetect.netEnvironment.ipAddress = response.ip;
 				clientDetect.netEnvironment.macAddress = response.macAddress;
+				clientDetect.browser.accept = response.accept;
+				clientDetect.browser.acceptLanguage = response.acceptLanguage;
+				clientDetect.browser.acceptEncoding = response.acceptEncoding;
 			},
 			fail : function(status){
 				alert(status);
